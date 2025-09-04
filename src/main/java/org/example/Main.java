@@ -14,6 +14,10 @@ import org.example.Creational.Prototype.StudentRegistry;
 import org.example.Creational.Singleton.Singleton;
 import org.example.Creational.Singleton.SingletonThreadSaftey;
 import org.example.Creational.Singleton.SingletonThreadSafteyEager;
+import org.example.Structural.Adapter.ICICIBankAdapter;
+import org.example.Structural.Adapter.IPaymentBank;
+import org.example.Structural.Decorator.*;
+import org.example.Structural.Facade.Amazon;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -70,6 +74,19 @@ public class Main {
         Burger naveensBurger=KFC.createBurger("veg","large",2);
         naveensPizza.cook();
         naveensBurger.cook();
-
+    //Adapter
+        IPaymentBank iPaymentBank=new ICICIBankAdapter();
+        boolean paymentStatus=iPaymentBank.processPayment("2241345677",200.09f,"0993214556");
+        System.out.println(paymentStatus);
+    //Facade
+        Amazon amazon=new Amazon();
+        amazon.onOrderPlaced("dumble","imad@gmail.com");
+    //Decorator
+        IceCream naveenOrder=new OrangeCone();
+        naveenOrder=new ChoclateIceCream(naveenOrder);
+        naveenOrder=new BlackCurrentIceCream(naveenOrder);
+        naveenOrder=new Cherry(naveenOrder);
+        System.out.println(naveenOrder.getDesc());
+        System.out.println(naveenOrder.getCost());
     }
 }
